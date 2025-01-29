@@ -1,6 +1,6 @@
 ﻿
 int[] prices = [3, 2, 6, 5, 0, 3];
-Console.WriteLine(MaxProfit(prices));
+Console.WriteLine(MaxProfitBruteForce(prices));
 
     int MaxProfitBruteForce(int[] prices)
     {
