@@ -1,6 +1,10 @@
 ﻿public class Solution
 {
-    public int EvalRPN(string[] tokens)
+    public static void Main(string[] args)
+    {
+        Solution.EvalRPN(["4","13","5","/","+"]);
+    }
+    public static int EvalRPN(string[] tokens)
     {
         Stack<string> group = new Stack<string>();
         foreach (var item in tokens)
@@ -22,14 +26,14 @@
         return int.Parse(group.Pop());
     }
 
-    private bool IsOperation(string item)
+    private static bool IsOperation(string item)
     {
         return item == "/"
             || item == "*"
             || item == "+"
             || item == "-";
     }
-    private int DoOperation(int x, int y, string operation)
+    private static int DoOperation(int x, int y, string operation)
     {
         switch (operation)
         {
