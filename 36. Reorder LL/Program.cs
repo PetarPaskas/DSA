@@ -1,4 +1,6 @@
 ﻿
+using _36._Reorder_LL;
+
 int[] items = [2, 4, 6, 8];
 
 var head = new ListNode();
@@ -11,13 +13,12 @@ foreach (var item in items)
     head = head.next;
 }
 
-
+;
 
 //You may not modify the values in the list's nodes, but instead you must reorder the nodes themselves.
 //MISSED THIS, ANOTHER TIME I GUESS
-
-foreach (var item in GetList(ReorderList(initHead.next)))
-    Console.WriteLine(item);
+Solution.DoIt(initHead.next);
+Solution.ShowItems(initHead.next);
 
 ListNode ReorderList(ListNode LL)
 {
