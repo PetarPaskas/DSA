@@ -1,8 +1,20 @@
-﻿ 
+﻿
+
+int[] items = [1, 2, 3, 4];
+ListNode initHead = new ListNode();
+ListNode head = initHead;
+foreach(var item in items)
+{
+    initHead.next = new ListNode(item);
+    initHead = initHead.next;
+}
+
+var res = new BetterSolution().ReverseList(head);
 
 
 
-public class ListNode {
+    
+    public class ListNode {
      public int val;
      public ListNode next;
     public ListNode(int val=0, ListNode next=null) {
@@ -10,6 +22,27 @@ public class ListNode {
         this.next = next;
     }
   }
+
+
+public class BetterSolution
+{
+    public ListNode ReverseList(ListNode head)
+    {
+        ListNode previous = null;
+        var current = head;
+
+        while (current != null)
+        {
+            var next = current.next;
+
+            current.next = previous;
+            previous = current;
+            current = next;
+        }
+
+        return previous;
+    }
+}
 
 public class Solution
 {
@@ -46,3 +79,6 @@ public class Solution
         PopulateStack(head.next);
     }
 }
+
+
+
