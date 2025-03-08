@@ -1,6 +1,10 @@
 ﻿
-int[] items = [1,2,3,4];
-int n = 4;
+
+
+
+
+int[] items = [1,2];
+int n = 2;
 
 var head = new ListNode();
 
@@ -12,65 +16,48 @@ foreach (var item in items)
     head = head.next;
 }
 
+RemoveNthFromEnd(initHead.next, n);
 
-var result = RemoveNthFromEnd(initHead.next, n);
 
-while(result != null)
-{
-    Console.WriteLine(result.val);
-    result = result.next;
-}
 
 ListNode RemoveNthFromEnd(ListNode head, int n)
 {
-    DoublyLinkedList initHead = new DoublyLinkedList(null);
-    DoublyLinkedList start = initHead;
-    DoublyLinkedList prev = null;
-    while (head != null)
+    var dummyLeft = new ListNode(0, head);
+
+    var left = dummyLeft;
+    var right = GetNthFromTheFront(head, n);
+
+
+    while (right != null)
     {
-        initHead.next = new DoublyLinkedList(head);
-        initHead.previous = prev;
-        prev = initHead;
-        initHead = initHead.next;
-        head = head.next;
+        right = right.next;
+        left = left.next;
     }
-    initHead.previous = prev;
 
-    start.next.previous = null;
+    left.next = left.next.next;
 
+    return dummyLeft.next;
+}
+
+ListNode GetNthFromTheFront(ListNode head, int n)
+{
     int i = 0;
-    DoublyLinkedList search = initHead;
-
-    while (i < n)
+    ListNode result = head;
+    while(i < n)
     {
-        if (i == (n - 1))
-        { 
-            bool hasNoPrev = search.previous == null;
-            bool hasNoNext = search.next == null;
-
-            if(hasNoPrev && hasNoNext)
-                return null;
-
-            if (hasNoNext)
-            {
-                search.previous.value.next = null;
-                break;
-            }
-
-            if (hasNoPrev)
-                return search.next.value;
-
-            search.previous.value.next = search.next.value;
-        }
-        search = search.previous;
+        result = result?.next;
         i++;
     }
 
-    return start.next.value;
+    return result;
 }
 
 
-public class ListNode
+
+
+
+
+class ListNode
 {
     public int val;
     public ListNode next;
@@ -81,14 +68,3 @@ public class ListNode
     }
 }
 
-public class DoublyLinkedList
-{
-    public ListNode value;
-    public DoublyLinkedList next;
-    public DoublyLinkedList previous;
-
-    public DoublyLinkedList(ListNode item)
-    {
-        value = item;
-    }
-}
