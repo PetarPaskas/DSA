@@ -1,6 +1,9 @@
 class Tree
 {
     private TreeNode _root { get; set; }
+    public Tree(){
+
+    }
     public Tree(TreeNode root)
     {
         _root = root;
@@ -31,9 +34,9 @@ class Tree
     public TreeNode Find(int value)
     {
         var findResult = Find(value, _root, null);
-        
-            if (findResult is not null && findResult.Value == value)
-                return findResult;
+
+        if (findResult is not null && findResult.Value == value)
+            return findResult;
 
         return null;
     }
@@ -51,6 +54,47 @@ class Tree
             return Find(value, current.LeftNode, current);
 
         return previous;
+    }
+
+    public void InOrderTraversal()
+    {
+        InOrderTraversal(_root);
+    }
+
+    private void InOrderTraversal(TreeNode node)
+    {
+        if (node == null) return;
+
+        InOrderTraversal(node.LeftNode);
+        Console.WriteLine(node.Value);
+        InOrderTraversal(node.RightNode);
+    }
+
+    public void PreOrderTraversal()
+    {
+        PreOrderTraversal(_root);
+    }
+    private void PreOrderTraversal(TreeNode node)
+    {
+        if (node == null) return;
+
+        Console.WriteLine(node.Value);
+        PreOrderTraversal(node.LeftNode);
+        PreOrderTraversal(node.RightNode);
+    }
+
+    public void PostOrderTraversal()
+    {
+        PostOrderTraversal(_root);
+    }
+    private void PostOrderTraversal(TreeNode node)
+    {
+        if (node == null) return;
+
+        PostOrderTraversal(node.LeftNode);
+        PostOrderTraversal(node.RightNode);
+        Console.WriteLine(node.Value);
+
     }
 }
 
