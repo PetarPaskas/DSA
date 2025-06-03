@@ -96,6 +96,34 @@ class Tree
         Console.WriteLine(node.Value);
 
     }
+
+    public void BreadthTraversal()
+    {
+        BreadthTraversal(_root);
+    }
+
+    private void BreadthTraversal(TreeNode root)
+    {
+        Queue<TreeNode> queue = new Queue<TreeNode>();
+        queue.Enqueue(root);
+
+        int limit = queue.Count;
+        while (limit > 0) 
+        {
+            for (int i = 0; i < limit; i++)
+            {
+                var node = queue.Dequeue();
+
+                if (node == null) continue;
+
+                Console.WriteLine(node.Value);
+
+                queue.Enqueue(node.LeftNode);
+                queue.Enqueue(node.RightNode);
+            }
+            limit = queue.Count;
+        }
+    }
 }
 
 
