@@ -123,6 +123,22 @@ class Tree
             }
             limit = queue.Count;
         }
+    } 
+
+    public int GetHeightOfTheTree()
+    {
+        return GetHeightOfTheTree(_root, 0);
+    }
+
+    private int GetHeightOfTheTree(TreeNode node, int height)
+    {
+        if (node == null) return height-1;
+
+        
+        int lh = GetHeightOfTheTree(node.LeftNode, height + 1);
+        int rh = GetHeightOfTheTree(node.RightNode, height + 1);
+
+        return lh > rh ? lh : rh;
     }
 }
 
