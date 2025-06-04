@@ -10,4 +10,4 @@
 
 
 
-Tree_Equality.Test();
+Tree_CheckIsBstTree.Test();
