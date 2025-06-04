@@ -10,4 +10,4 @@
 
 
 
-Tree_Height.Test();
+Tree_Equality.Test();

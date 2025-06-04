@@ -1,4 +1,4 @@
-class Tree
+public class Tree
 {
     private TreeNode _root { get; set; }
     public Tree(){
@@ -8,6 +8,8 @@ class Tree
     {
         _root = root;
     }
+
+    public TreeNode GetRoot() => _root;
 
     public bool Insert(int value)
     {
