@@ -81,9 +81,9 @@ public class AvlTree
             bool isRightNodeHeavy = leftNodeBalance < 0;    //ako ide O-O-O u levo, onda ce na sledecem node balance biti 1. Ako ide O   <- tu ce biti -1 i znaci da ide left right rotation
             if (isRightNodeHeavy)                                                                                             //      \
             {                                                                                                                 //       O
-                //do left right rotation                                                                                        
+                LeftRotation(current); //do left right rotation
             }
-            //do right rotation on node
+            RightRotation(current); //do right rotation on node
 
         }
 
@@ -93,11 +93,41 @@ public class AvlTree
             bool isLeftNodeHeavy = rightNodeBalance > 0;    //ako ide O-O-O u desno, onda ce na sledecem node balance biti 1. Ako ide    O   <- tu ce biti 1 i znaci da ide left right rotation
             if (isLeftNodeHeavy)                                                                                             //         /
             {                                                                                                                 //       O
-                //do right left rotation
+                RightRotation(current); //do right left rotation
             }
-            //do left rotation on node
+            LeftRotation(current); //do left rotation on node
         }
-
         //if none, go to next
+    }
+
+    private TreeNode LeftRotation(TreeNode node)
+    {
+        var newRoot = node.RightNode;
+        var currentLeftNodeOnNewRoot = newRoot.LeftNode;
+
+        newRoot.LeftNode = node;
+        node.RightNode = currentLeftNodeOnNewRoot;
+
+        SetHeight(node);
+        SetHeight(newRoot);
+        return newRoot;
+    }
+
+    private TreeNode RightRotation(TreeNode node)
+    {
+        var newRoot = node.LeftNode;
+        var currentRightNodeOnNewRoot = newRoot.RightNode;
+
+        newRoot.RightNode = node;
+        node.LeftNode = currentRightNodeOnNewRoot;
+
+        SetHeight(node);
+        SetHeight(newRoot);
+        return newRoot;
+    }
+
+    private void SetHeight(TreeNode node)
+    {
+        node.Height = Math.Max(node.LeftNode.Height, node.RightNode.Height) + 1;
     }
 }
